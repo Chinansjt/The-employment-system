@@ -1,0 +1,37 @@
+{
+  "name": "ningning",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build --mode pro",
+    "build_pre": "vue-cli-service build --mode pre",
+    "lint": "vue-cli-service lint",
+    "vue_eslintrc_fix": "eslint --ext .js,.vue src --fix"
+  },
+  "dependencies": {
+    "@riophae/vue-treeselect": "0.0.38",
+    "echarts": "^4.1.0",
+    "vant": "^2.2.14",
+    "vue": "^2.6.6",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.5.0",
+    "@vue/cli-plugin-eslint": "^3.5.0",
+    "@vue/cli-service": "^3.5.0",
+    "@vue/eslint-config-standard": "^4.0.0",
+    "babel-eslint": "^10.0.1",
+    "babel-plugin-import": "^1.13.0",
+    "eslint": "^5.8.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "less": "^3.9.0",
+    "less-loader": "^4.1.0",
+    "node-sass": "^4.9.0",
+    "postcss-pxtorem": "^4.0.1",
+    "postcss-rpxtorem": "^4.0.1",
+    "sass-loader": "^7.1.0",
+    "vue-template-compiler": "^2.5.21"
+  }
+}

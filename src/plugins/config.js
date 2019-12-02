@@ -21,7 +21,7 @@ switch(node_env){
 }
 
 export default {
-    title: "金蘑菇",
+    title: "就业系统",
     deployUrl: deployUrl,
     // 腾讯埋点参数
     mtaParams: {

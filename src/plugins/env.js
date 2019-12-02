@@ -1,3 +1,3 @@
 export default {
-    host: "", // yapi
+    host: "yapi.demo.qunar.com/mock/48066/api", // yapi
 }

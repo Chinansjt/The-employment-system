@@ -1,117 +1,72 @@
 <template>
-	<Layout style="height: 100%" class="main">
-        <!-- 顶部导航 -->
-        <Header class="header-con clearfix">
-            <div class="fl collapsed-logo" :class="collapsed ? 'collapsed-logo fl':'spread-logo fl'">
-                <img :src="collapsed ? companyInfo.collapsedLogoUrl : companyInfo.logoUrl" />
-            </div>
-            <header-bar :collapsed="collapsed" @on-coll-change="handleCollapsedChange">
-                <user :company-info="companyInfo"/>
-            </header-bar>
-        </Header>
-
-		<Layout>
-            <!-- 侧边栏 -->
-            <Sider hide-trigger collapsible :width="220" :collapsed-width="64" v-model="collapsed" class="left-sider">
-                <side-menu accordion ref="sideMenu" :active-name="$route.name" :collapsed="collapsed" @on-select="turnToPage" :menu-list="menuList">
-                </side-menu>
-            </Sider>
-
-            <!-- 内容 -->
-			<Content class="main-content-con">
-				<Layout class="main-layout-con">
-                    <template v-if="companyInfo">
-                        <Content class="content-wrapper">
-                            <router-view/>
-                            <ABackTop :height="100" :bottom="80" :right="30" container=".content-wrapper"/>
-                        </Content>
-                    </template>
-				</Layout>
-                <!-- 内容loading -->
-                <div v-if="this.$store.state.isLoading" class="loading">
-                    <Spin fix>
-                        <Icon type="ios-loading" size=30 class="spin-icon-load"/>
-                    </Spin>
-                </div>
-			</Content>
-		</Layout>
-	</Layout>
+  <div>
+    <router-view></router-view>
+    <van-tabbar v-model="active" @change="change" active-color="#07c160" inactive-color="#000">
+      <van-tabbar-item to="/home">
+        <span>就业广场</span>
+        <img slot="icon" slot-scope="props" :src="props.active ? icon.homeActive : icon.homeInActive" />
+      </van-tabbar-item>
+      <van-tabbar-item to="/company">
+        <span>公司</span>
+        <img slot="icon" slot-scope="props" :src="props.active ? icon.companyActive : icon.companyInActive" />
+      </van-tabbar-item>
+      <van-tabbar-item >
+        <span>个人中心</span>
+        <img slot="icon" slot-scope="props" :src="props.active ? icon.userActive : icon.userInActive" />
+      </van-tabbar-item>
+    </van-tabbar>
+  </div>
 </template>
 
 <script>
-import SideMenu from "./components/side-menu"
-import HeaderBar from "./components/header-bar"
-import User from "./components/user"
-import ABackTop from "./components/a-back-top"
-import { mapMutations, mapActions } from "vuex"
-import routers from "../../router/router"
-import "./index.scss"
+import Vue from "vue";
+import { Tabbar, TabbarItem } from "vant";
+
+Vue.use(Tabbar).use(TabbarItem);
 
 export default {
-    name: "Main",
-    components: {
-        SideMenu,
-        HeaderBar,
-        User,
-        ABackTop
-    },
-    data () {
-        return {
-            collapsed: false,
-        }
-    },
-    computed: {
-        companyInfo () {
-            return this.$store.state.companyInfo
-        },
-        menuList () {
-            return this.$store.getters.menuList
-        }
-    },
-    methods: {
-        ...mapMutations([
-            "setBreadCrumb",
-            "setHomeRoute",
-        ]),
-        ...mapActions([
-            "getCompanyInfo",
-        ]),
-        turnToPage (route) {
-            let { name, params, query } = {}
-            if (typeof route === "string") {
-                name = route
-            }else {
-                name = route.name
-                params = route.params
-                query = route.query
-            }
-            if (name.indexOf("isTurnByHref_") > -1) {
-                window.open(name.split("_")[1])
-                return
-            }
-            this.$router.push({
-                name,
-                params,
-                query
-            })
-        },
-        handleCollapsedChange (state) {
-            this.collapsed = state
-        },
-    },
-    watch: {
-        "$route" (newRoute) {
-            const { name, query, params, meta } = newRoute
-            this.setBreadCrumb(newRoute)
-            this.$refs.sideMenu.updateOpenName(newRoute.name)
-        }
-    },
-    created () {
-        let year = new Date().getFullYear() + ""
-        this.getCompanyInfo(year)
-        this.setHomeRoute(routers)
-        const { name, params, query, meta } = this.$route
-        this.setBreadCrumb(this.$route)
+  name: "Main",
+  data() {
+    return {
+      active: 0,
+      icon: {
+        homeInActive:
+          "https://papaning.oss-cn-hangzhou.aliyuncs.com/images/%E8%81%8C%E4%BD%8D.png",
+        homeActive:
+          "https://papaning.oss-cn-hangzhou.aliyuncs.com/images/%E5%8C%B9%E9%85%8D%E8%81%8C%E4%BD%8D-%E5%A1%AB%E5%85%85.png",
+          companyInActive: 'https://papaning.oss-cn-hangzhou.aliyuncs.com/images/%E5%85%AC%E5%8F%B8%20%282%29.png',
+          companyActive: 'https://papaning.oss-cn-hangzhou.aliyuncs.com/images/%E5%85%AC%E5%8F%B8%20%281%29.png',
+          userInActive: 'https://papaning.oss-cn-hangzhou.aliyuncs.com/images/%E4%B8%AA%E4%BA%BA%20%289%29.png',
+          userActive: 'https://papaning.oss-cn-hangzhou.aliyuncs.com/images/%E4%B8%AA%E4%BA%BA%20%282%29.png'
+      }
+    };
+  },
+  methods: {
+    /**
+     * tab栏的切换
+     */
+    change() {
+      if (this.active === 0) {
+        this.$router.push({
+          path: "/Home",
+          replace: true
+        });
+      } else if (this.active === 1) {
+        this.$router.push({
+          path: "/company",
+          replace: true
+        });
+      }
     }
-}
+  },
+  created() {
+    // 判断当前页面是否为home或newpersonal页面
+    const CURRENTTABBAR = window.location.pathname.split("/")[1];
+    if (CURRENTTABBAR === "home") {
+      this.active = 0;
+    } else if (CURRENTTABBAR === "company") {
+      this.active = 1;
+    }
+  }
+};
 </script>

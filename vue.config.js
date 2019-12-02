@@ -47,6 +47,17 @@ module.exports = {
 		port: 9090,
 		https: false,
 		hotOnly: false,
-        before: app => { }
+        before: app => { },
+        proxy: {
+            '/proxyApi': {
+              target: 'http://yapi.demo.qunar.com/mock/48066',
+              changeOrigin: true,
+              pathRewrite: {
+                '/proxyApi': '/'
+              }
+            }
+          }
+      
+    
     },
 }

@@ -5,7 +5,7 @@ module.exports = {
             browsers: ["Android >= 4.0", "iOS >= 7"]
         },
         "postcss-pxtorem": {
-            rootValue: 20, // 根元素字体大小
+            rootValue: 16, // 根元素字体大小
             unitPrecision: 5, // 允许REM单位增长的十进制数
             propList: ["*"], // 可以从px更改为rem的属性
             selectorBlackList: [], // 要忽略的选择器并保留为px
@@ -14,7 +14,7 @@ module.exports = {
             minPixelValue: 0
         },
         "postcss-rpxtorem": {
-            rootValue: 20, // 根元素字体大小
+            rootValue: 16, // 根元素字体大小
             unitPrecision: 5, // 允许REM单位增长的十进制数
             propList: ["*"], // 可以从px更改为rem的属性
             selectorBlackList: [], // 要忽略的选择器并保留为px

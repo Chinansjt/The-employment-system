@@ -20,31 +20,31 @@
         class="preach_list"
       >
         <div v-for="item in preachList">
-          <router-link :to="{ path: 'details', params: { preach_id: item.preach_id }}"></router-link>
-          <van-row class="preach_box" gutter="10">
+          <van-row @click="toPreachDetails(item.company_id)" class="preach_box" gutter="6">
             <van-col span="4">
               <div class="preach_box_img">
                 <img :src="item.img" />
               </div>
             </van-col>
             <van-col span="15">
-              <div class="preach_box_preach">{{item.preach}}</div>
+              <div class="preach_box_preach">{{item.preach}}是德国获得任何人</div>
               <div class="preach_box_school">
-                <van-icon name="location-o" />
+                <van-icon name="location-o" class="preach_icon" />
                 {{item.school}}
               </div>
               <div class="preach_box_address">
                 <van-icon
-                  name="https://papaning.oss-cn-hangzhou.aliyuncs.com/images/%E6%95%99%E5%AE%A4%E7%AE%A1%E7%90%86.png"
+                  class="preach_icon"
+                  name="https://papaning.oss-cn-hangzhou.aliyuncs.com/images/%E6%95%99%E5%AE%A4.png"
                 />
                 {{item.address}}
               </div>
             </van-col>
             <van-col span="5">
-              <div class="preach_box_right">{{item.date}}</div>
-              <div class="preach_box_right">{{item.time}}</div>
-              <div class="preach_box_right">
-                <van-icon name="eye-o" /> 10
+              <div class="preach_box_right date">{{item.date}}</div>
+              <div class="preach_box_right time">{{item.time}}</div>
+              <div class="preach_box_right ">
+                <van-icon class="preach_icon" name="eye-o" />10
               </div>
             </van-col>
           </van-row>
@@ -127,6 +127,13 @@ export default {
           notify.error(res.message);
         }
       });
+    },
+    //跳转页面
+    toPreachDetails(company_id) {
+      this.$router.push({
+              path: "/preach/details",
+              params: { company_id: company_id }
+						});
     }
   }
 };
@@ -149,38 +156,62 @@ export default {
   .preach_box {
     padding: 0 20rpx;
     .preach_box_img {
-        height: 210rpx;
+      height: 190rpx;
       img {
-        width: 150rpx;
+        width: 110rpx;
         position: relative;
         top: 50%;
         transform: translateY(-50%);
-        
       }
     }
     .preach_box_preach {
-      font-size: 50rpx;
+      font-size: 40rpx;
       height: 80rpx;
       line-height: 80rpx;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-family: "Microsoft Yahei";
     }
     .preach_box_school {
-      font-size: 30rpx;
-      height: 60rpx;
-      line-height: 60rpx;
+      font-size: 25rpx;
+      height: 40rpx;
+      line-height: 40rpx;
+       overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: #A9A9A9;
     }
     .preach_box_address {
-      font-size: 45rpx;
+      font-size: 35rpx;
+      height: 70rpx;
+      line-height: 70rpx;
+      color: 	#C0C0C0;
+    }
+    .preach_box_right {
+      text-align: end;
       height: 70rpx;
       line-height: 70rpx;
     }
-    .preach_box_right {
-    //   position: relative;
-    //   right: 0rpx;
+    .preach_icon {
+      position: relative;
+      top: 7rpx;
+      color: 	#C0C0C0;
+      
+    }
+    .date {
+      font-size: 33rpx;
+    }
+    .time {
+      font-size: 32rpx;
+      height: 50rpx;
+      line-height: 50rpx;
+      color: 	#DC143C;
     }
   }
 
   .preach_line {
-    background-color: rgb(235, 236, 238);
+    background-color: rgb(238, 235, 235);
     height: 10rpx;
     border-radius: 5rpx;
   }

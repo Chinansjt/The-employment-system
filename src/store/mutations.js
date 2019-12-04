@@ -1,5 +1,11 @@
 
 export default {
+
+    //更改简历
+    modifyResume(state,newResumeObj) {
+        console.log(newResumeObj,'这是mutations');
+        state.resumeObj = newResumeObj
+    },
 	showLoading(state){
 		state.isLoading = true
 	},
@@ -26,7 +32,8 @@ export default {
             state.popupShow = true;
             state.popupType = window.mobileType;
         }
-	},
+    },
+    
 	closeOuterPage(state){
         state.popupShow = false;
     }

@@ -56,6 +56,11 @@ export default {
           path: "/company",
           replace: true
         });
+      } else if (this.active === 2) {
+        this.$router.push({
+          path: "/user",
+          replace: true
+        });
       }
     }
   },
@@ -66,6 +71,8 @@ export default {
       this.active = 0;
     } else if (CURRENTTABBAR === "company") {
       this.active = 1;
+    } else if (CURRENTTABBAR === "user") {
+      this.active = 2;
     }
   }
 };

@@ -1,10 +1,23 @@
-
+import Store from './index'
 export default {
-
     //更改简历
     modifyResume(state,newResumeObj) {
-        console.log(newResumeObj,'这是mutations');
-        state.resumeObj = newResumeObj
+        state.resumeObj = newResumeObj;
+        if(newResumeObj !== '') { //当每次更爱简历或者添加简历的时候，只要简历对象不为空，就计算一下简历完成度
+            let fraction = 0;
+            Object.keys(newResumeObj).forEach((key) => {
+                if(newResumeObj[key] !== '') {
+                    fraction += 4;  //每一项4分，满分100分
+                }
+            })
+            console.log('到这里了1')
+            Store.dispatch('modifyResumeComplete',fraction)
+        }
+    },
+    //修改简历完成度
+    modifyResumeComplete(state,newResumeComplete){
+        console.log('到这里了')
+       state.resumeComplete = newResumeComplete;
     },
 	showLoading(state){
 		state.isLoading = true

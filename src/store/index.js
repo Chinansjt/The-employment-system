@@ -9,7 +9,8 @@ const state = {
     popupUrl: "",
     popupShow: false,
 	popupType: "clear",
-	resumeObj: {
+	resumeComplete: 0,
+	resumeObj: [{
 		img: 'https://img.yzcdn.cn/vant/leaf.jpg',
 		name: "宁柏森",
 		phone: "17816096297",
@@ -35,7 +36,7 @@ const state = {
 		competition: '大学生挑战杯是“挑战杯”全国大学生系列科技学术竞赛的简称，是由共青团中央、中国科协、教育部和全国学联共同主办的全国性的大学生课外学术实践竞赛。“ [1]  挑战杯”竞赛在中国共有两个并列项目，一个是“挑战杯”中国大学生创业计划竞赛，另一个则是“挑战杯”全国大学生课外学术科技作品竞赛。这两个项目的全国竞赛交叉轮流开展，每个项目每两年举办一届。 [1]', //竞赛，
 		cadre: '学生会最高负责人，学生代表大会的召集人。学生会实行主席负责制，学生会主席对学校党政、学生代表大会和学生会负责。学生会主席分为校学生会主席和年级学生会主席。',  //干部经历
 		otherActivities: '很多', //其他活动
-	}
+	}]
 }
 
 const actions = {
@@ -43,6 +44,9 @@ const actions = {
 	//修改简历
 	modifyResume(context,newResumeObj) {
 		context.commit("modifyResume",newResumeObj)
+	},
+	modifyResumeComplete(context,newResumeComplete) {
+		context.commit('modifyResumeComplete',newResumeComplete)
 	},
     // 全局loading窗口
 	showLoading(context){

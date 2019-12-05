@@ -1,6 +1,6 @@
 <template>
   <div class="resume">
-    <van-nav-bar :title="navTitle" left-text="返回"   @click-left="$router.go(-1)" left-arrow />
+    <van-nav-bar :title="navTitle" left-text="返回" fixed   @click-left="$router.go(-1)" left-arrow />
     <!-- 个人信息 -->
     <div class="resume_information padding_20">
       <van-divider :style="{ color: '#07c160', borderColor: '#07c160', padding: '0 20rpx' }">个人信息</van-divider>
@@ -420,13 +420,13 @@ export default {
       otherActivitiesChecked: false, //其他活动开关
       showSucceed: false, //提交成功弹框
       second: 4, //倒计时关闭
-      resumeObj: this.$store.state.resumeObj //简历对象
+      resumeObj: this.$store.state.resumeObj[0] //简历对象
     };
   },
-  computed: mapState({
-    // 箭头函数可使代码更简练
-    state: state => state.resumeObj
-  }),
+//   computed: mapState({
+//     // 箭头函数可使代码更简练
+//     state: state => state.resumeObj
+//   }),
   created() {
     this.initialization();
   },
@@ -496,7 +496,9 @@ export default {
         message: "您确定要修改简历吗"
       })
         .then(() => {
+            console.log(111)
           this.modifyResume(newResumeObj);
+          console.log(1244)
           this.second = 4;
           const timer = setInterval(() => {
             this.showSucceed = true;
@@ -521,8 +523,8 @@ export default {
           let resumeObj = this.resumeObj;
           Object.keys(resumeObj).forEach(function(key) {
             resumeObj[key] = "";
-            Toast.success("重置成功");
           });
+          Toast.success("重置成功");
         })
         .catch(() => {});
     }
@@ -546,6 +548,9 @@ export default {
 }
 .resume {
   font-size: 40rpx !important;
+  .resume_information {
+      margin-top: 120rpx;
+  }
   .resume_activity_experience {
     .resume_switch_box {
       font-size: 40rpx;

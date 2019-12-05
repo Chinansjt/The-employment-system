@@ -7,7 +7,9 @@ const Company = r => require.ensure([], () => r(require("../page/main/components
 
 const User = r => require.ensure([], () => r(require("../page/main/components/user")), "user") //个人中心页面
 
-const Resume = r => require.ensure([], () => r(require("../page/resume")), "resume") //宣讲会页面
+const Resume = r => require.ensure([], () => r(require("../page/resume")), "resume") //简历页面
+
+const ResumeList = r => require.ensure([], () => r(require("../page/resumeList")), "resumeList") //简历列表页面
 
 const Login = r => require.ensure([], () => r(require("../page/login")), "login")
 
@@ -79,6 +81,14 @@ export default [
         component: Resume,
         meta: {
                 title: "简历"
+        }
+    },
+    {
+        path: "/user/resumeList",
+        name: "resumeList",
+        component: ResumeList,
+        meta: {
+                title: "简历列表"
         }
     },
     {

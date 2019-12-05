@@ -16,7 +16,7 @@
       <div class="user_information_circle">
         <van-circle
           v-model="currentRate"
-          :rate="90"
+          :rate="rate"
           :size="size"
           :color="gradientColor"
           :speed="100"
@@ -27,10 +27,23 @@
 
     <div id="searchBar" class="user_tab margin_20">
       <van-grid :border="false">
-        <van-grid-item :to="{ path: '/user/resume'}" icon="https://papaning.oss-cn-hangzhou.aliyuncs.com/images/%E7%AE%80%E5%8E%86.png" text="在线简历" />
-        <van-grid-item icon="https://papaning.oss-cn-hangzhou.aliyuncs.com/images/%E7%AB%8B%E5%8D%B3%E6%8A%95%E9%80%92.png" text="我的投递" />
-        <van-grid-item icon="https://papaning.oss-cn-hangzhou.aliyuncs.com/images/%E5%85%AC%E5%8F%B8%20%284%29.png" text="关注公司" />
-        <van-grid-item icon="https://papaning.oss-cn-hangzhou.aliyuncs.com/images/%E6%94%B6%E8%97%8F.png" text="职位收藏" />
+        <van-grid-item
+          :to="{ path: '/user/resumeList'}"
+          icon="https://papaning.oss-cn-hangzhou.aliyuncs.com/images/%E7%AE%80%E5%8E%86.png"
+          text="在线简历"
+        />
+        <van-grid-item
+          icon="https://papaning.oss-cn-hangzhou.aliyuncs.com/images/%E7%AB%8B%E5%8D%B3%E6%8A%95%E9%80%92.png"
+          text="我的投递"
+        />
+        <van-grid-item
+          icon="https://papaning.oss-cn-hangzhou.aliyuncs.com/images/%E5%85%AC%E5%8F%B8%20%284%29.png"
+          text="关注公司"
+        />
+        <van-grid-item
+          icon="https://papaning.oss-cn-hangzhou.aliyuncs.com/images/%E6%94%B6%E8%97%8F.png"
+          text="职位收藏"
+        />
       </van-grid>
     </div>
     <div class="margin_20 user_img">
@@ -75,7 +88,7 @@ export default {
   data() {
     return {
       currentRate: 0,
-      text: "简历完善度90%",
+      rate: this.$store.state.resumeComplete,
       gradientColor: {
         "0%": "#f01313",
         "100%": "#008000"
@@ -85,6 +98,11 @@ export default {
       size: 100, //圆的大小
       chang: true //是否显示圆中文字
     };
+  },
+  computed: {
+text() {
+      return `简历完成度${this.currentRate.toFixed(0)}%`;
+    },
   },
   mounted() {
     window.addEventListener("scroll", this.handleScroll);

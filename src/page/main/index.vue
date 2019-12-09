@@ -59,7 +59,6 @@ export default {
       } else if (this.active === 2) {
         this.$router.push({
           path: "/user",
-          replace: true
         });
       }
     }

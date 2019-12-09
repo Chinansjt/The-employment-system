@@ -107,6 +107,9 @@ text() {
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
   },
+  created() {
+    
+  },
   methods: {
     handleScroll() {
       let scrollTop =

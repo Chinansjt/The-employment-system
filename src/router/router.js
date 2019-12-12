@@ -23,6 +23,8 @@ const PreachDetails = r => require.ensure([], () => r(require("../page/preachDet
 
 const Election = r => require.ensure([], () => r(require("../page/election")), "election")  //双选会页面
 
+const Form = r => require.ensure([], () => r(require("../page/form")), "form") //提交表单
+
 const Error = r => require.ensure([], () => r(require("../page/error")), "user")
 
 export default [
@@ -34,6 +36,14 @@ export default [
             title: "登录",
             hideInMenu: true
         },
+    },
+    {
+        path: "/subForm",
+        component: Form,
+        meta: {
+            title: '提交',
+            hideInMenu: true
+        }
     },
     {
         path: '/details',

@@ -30,7 +30,7 @@
     "eslint-plugin-vue": "^5.0.0",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
-    "node-sass": "^4.9.0",
+    "node-sass": "^4.13.1",
     "postcss-pxtorem": "^4.0.1",
     "postcss-rpxtorem": "^4.0.1",
     "sass-loader": "^7.1.0",
